@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Feedback Collector</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>We'd love your feedback!</h1>
+
+        {% if request.args.get('success') %}
+            <p class="success-message">Thank you! Your feedback has been submitted.</p>
+        {% endif %}
+
+        <form action="/submit-feedback" method="POST" class="feedback-form">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="rating">Rating (1 to 5)</label>
+            <select id="rating" name="rating" required>
+                <option value="">-- Select --</option>
+                <option value="1">1 - Poor</option>
+                <option value="2">2 - Fair</option>
+                <option value="3">3 - Good</option>
+                <option value="4">4 - Very Good</option>
+                <option value="5">5 - Excellent</option>
+            </select>
+
+            <label for="comments">Comments</label>
+            <textarea id="comments" name="comments" rows="4"></textarea>
+
+            <button type="submit">Submit Feedback</button>
+        </form>
+
+        <p class="admin-link"><a href="/admin-dashboard">Go to Admin Dashboard</a></p>
+    </div>
+</body>
+</html>
